@@ -1,12 +1,26 @@
+# Core LangChain (versiones estables probadas)
+langchain==0.3.25
+langchain-core==0.3.65
+langchain-community==0.3.24
+langchain-openai==0.3.18
+langchain-chroma==0.2.4
+langchain-text-splitters==0.3.8
+ 
+# Vector DB & Search
 chromadb==1.5.9
-langchain==1.3.2
-langchain-chroma==1.1.0
-langchain-classic==1.0.7
-langchain-community==0.4.2
-langchain-core==1.4.0
-langchain-openai==1.2.2
-langchain-protocol==0.0.15
-langchain-text-splitters==1.1.2
-openai==2.38.0
+rank-bm25==0.2.2
+ 
+# Document Processing
 pypdf==6.12.2
 python-dotenv==1.2.2
+ 
+# LLM & Embeddings
+openai==1.82.0
+sentence-transformers==3.0.1
+ 
+# RAG Evaluation & Datasets
+ragas==0.1.16
+datasets==2.20.0
+ 
+# Utils
+tqdm==4.67.0
