@@ -1,15 +1,17 @@
 # RAG-Pipeline
 
-Pipeline de **Retrieval-Augmented Generation (RAG)** con LangChain, ChromaDB y OpenAI para convertir un PDF en un asistente conversacional con respuestas basadas en contexto real.
+Language: **English (default)** | [Español](#español)
 
-Este repositorio incluye:
-- una versión **Beginner** (RAG base),
-- una versión **Intermediate** (RAG híbrido optimizado),
-- y un script de **evaluación automática** con RAGAS.
+Retrieval-Augmented Generation (RAG) pipeline built with LangChain, ChromaDB, and OpenAI to turn a PDF into a grounded conversational assistant.
+
+This repository includes:
+- a **Beginner** version (baseline RAG),
+- an **Intermediate** version (optimized hybrid RAG),
+- and an **automatic evaluation** script with RAGAS.
 
 ---
 
-## 📁 Estructura del proyecto
+## 📁 Project structure
 
 ```bash
 RAG-Pipeline/
@@ -25,41 +27,37 @@ RAG-Pipeline/
 
 ---
 
-## 🚀 Qué hace cada script
+## 🚀 What each script does
 
 ### 1) `Beginner/rag_test.py`
-Implementa un RAG clásico:
-- carga PDF,
-- chunking con `RecursiveCharacterTextSplitter`,
-- embeddings con `text-embedding-3-small`,
-- búsqueda vectorial con Chroma,
-- respuesta con `gpt-4o-mini`.
-
-Ideal para entender el flujo base de extremo a extremo.
+Baseline RAG implementation:
+- PDF loading,
+- chunking with `RecursiveCharacterTextSplitter`,
+- embeddings with `text-embedding-3-small`,
+- vector retrieval with Chroma,
+- answer generation with `gpt-4o-mini`.
 
 ### 2) `Intermediate/rag_test_v2.py`
-Versión optimizada:
-- metadatos por documento,
+Optimized version:
+- enriched document metadata,
 - `ParentDocumentRetriever`,
-- búsqueda híbrida con `EnsembleRetriever` (**BM25 + vectorial**),
-- persistencia de Chroma en disco (`/chroma_db`) para acelerar ejecuciones posteriores.
+- hybrid retrieval with `EnsembleRetriever` (**BM25 + vector**),
+- Chroma persistence in `/chroma_db` for faster subsequent runs.
 
 ### 3) `Intermediate/eval_rag.py`
-Evalúa calidad del RAG usando **RAGAS** con métricas:
+RAG quality evaluation using **RAGAS** metrics:
 - `context_recall`
 - `context_precision`
 - `answer_relevancy`
 
-Incluye preguntas y respuestas de referencia para medir rendimiento del pipeline.
-
 ---
 
-## ⚙️ Requisitos
+## ⚙️ Requirements
 
-- Python 3.10+ recomendado
-- Clave de OpenAI en variable de entorno: `OPENAI_API_KEY`
+- Recommended Python 3.10+
+- OpenAI key in environment variable: `OPENAI_API_KEY`
 
-Instalación de dependencias:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -67,50 +65,80 @@ pip install -r requirements.txt
 
 ---
 
-## 🔐 Configuración de entorno
+## 🔐 Environment setup
 
-Crea un archivo `.env` en la raíz del proyecto:
+Create a `.env` file at the repository root:
 
 ```env
-OPENAI_API_KEY=tu_api_key_aqui
+OPENAI_API_KEY=your_api_key_here
 ```
 
 ---
 
-## ▶️ Ejecución
+## ▶️ Run
 
-Desde la raíz del repositorio:
+From the repository root:
 
-### RAG básico
+### Baseline RAG
 ```bash
 python Beginner/rag_test.py
 ```
 
-### RAG intermedio (híbrido)
+### Intermediate hybrid RAG
 ```bash
 python Intermediate/rag_test_v2.py
 ```
 
-### Evaluación con RAGAS
+### RAGAS evaluation
 ```bash
 python Intermediate/eval_rag.py
 ```
 
-En los scripts de chat puedes salir escribiendo `salir`.
+In chat scripts, type `salir` to exit.
 
 ---
 
-## 🧠 Notas importantes
+## 🧠 Important notes
 
-- El PDF objetivo actual es `100cosas-es.pdf` en la raíz del repositorio.
-- Si ya existe `chroma_db`, la versión intermedia reutiliza los embeddings guardados.
-- La calidad de respuesta depende del chunking, del valor de `k` en retrieval y del prompt.
+- The target PDF is currently `100cosas-es.pdf` at the repository root.
+- If `chroma_db` already exists, the intermediate version reuses stored embeddings.
+- Response quality depends on chunking strategy, retrieval `k`, and prompt design.
 
 ---
 
-## 📌 Próximos pasos sugeridos
+## 📌 Suggested next steps
 
-- Añadir soporte para múltiples PDFs.
-- Incluir filtros por metadatos (capítulo, sección, páginas).
-- Agregar trazabilidad de fuentes en cada respuesta.
-- Automatizar evaluación continua de métricas RAGAS.
+- Add support for multiple PDFs.
+- Add metadata filtering (chapter, section, page ranges).
+- Add source traceability in answers.
+- Automate continuous RAGAS evaluation.
+
+---
+
+## Español
+
+Si prefieres leer esta guía en español, usa esta sección.
+
+### Resumen
+Este repositorio implementa un pipeline RAG con:
+- versión básica (`Beginner/rag_test.py`),
+- versión intermedia optimizada (`Intermediate/rag_test_v2.py`),
+- evaluación automática con RAGAS (`Intermediate/eval_rag.py`).
+
+### Instalación
+```bash
+pip install -r requirements.txt
+```
+
+### Configuración
+Crear `.env` en la raíz:
+```env
+OPENAI_API_KEY=tu_api_key_aqui
+```
+
+### Ejecución
+```bash
+python Beginner/rag_test.py
+python Intermediate/rag_test_v2.py
+python Intermediate/eval_rag.py
+```
