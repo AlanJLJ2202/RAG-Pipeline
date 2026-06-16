@@ -140,33 +140,53 @@ def run_ragas_evaluation(
     contexts: list[list[str]],
     ground_truths: list[str],
 ) -> dict[str, float]:
-    """Run RAGAS evaluation and return metrics as dict."""
-    try:
-        from datasets import Dataset
-        from ragas import evaluate
-        from ragas.metrics import answer_relevancy, context_precision, context_recall
+    """Run RAGAS evaluation in an isolated subprocess and return metrics.
 
-        dataset = Dataset.from_dict({
-            "question": questions,
-            "answer": answers,
-            "contexts": contexts,
-            "ground_truth": ground_truths,
-        })
+    RAGAS pulls in heavy native dependencies (torch, pyarrow via
+    ``datasets``) whose interop can segfault the interpreter. Running it
+    in a child process means such a crash is contained: the parent keeps
+    the classic IR metrics it already computed and simply records the
+    RAGAS failure here instead of dying.
+    """
+    import subprocess
+    import sys
+    import tempfile
 
-        result = evaluate(
-            dataset,
-            metrics=[context_recall, context_precision, answer_relevancy],
+    with tempfile.TemporaryDirectory() as tmp:
+        in_path = Path(tmp) / "ragas_in.json"
+        out_path = Path(tmp) / "ragas_out.json"
+
+        with open(in_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {
+                    "questions": questions,
+                    "answers": answers,
+                    "contexts": contexts,
+                    "ground_truths": ground_truths,
+                },
+                f,
+                ensure_ascii=False,
+            )
+
+        proc = subprocess.run(
+            [sys.executable, "-m", "Advanced._ragas_worker", str(in_path), str(out_path)],
+            capture_output=True,
+            text=True,
         )
 
+        if out_path.exists():
+            try:
+                with open(out_path, encoding="utf-8") as f:
+                    return json.load(f)
+            except (json.JSONDecodeError, OSError):
+                pass
+
+        # No output file => the worker crashed (e.g. segfault) before
+        # writing results. Surface a clean error instead of propagating.
+        detail = proc.stderr.strip().splitlines()[-1] if proc.stderr.strip() else ""
         return {
-            "context_recall": result["context_recall"],
-            "context_precision": result["context_precision"],
-            "answer_relevancy": result["answer_relevancy"],
+            "error": f"ragas worker failed (exit {proc.returncode}){f': {detail}' if detail else ''}"
         }
-    except ImportError:
-        return {"error": "ragas not installed"}
-    except Exception as e:
-        return {"error": str(e)}
 
 
 # ── Evaluation Suite ──────────────────────────────────────────

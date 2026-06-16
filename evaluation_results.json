@@ -1,0 +1,104 @@
+[
+  {
+    "timestamp": "2026-06-16T15:50:27.075447+00:00",
+    "total_questions": 5,
+    "mrr": 0.8667,
+    "ndcg_at_k": 0.9053,
+    "hit_rate_at_k": 1.0,
+    "ragas": {
+      "context_recall": 0.7,
+      "context_precision": 0.7933333332894666,
+      "answer_relevancy": 0.7739889685133521
+    },
+    "avg_latency_ms": 10019.53,
+    "p95_latency_ms": 13433.78,
+    "details": [
+      {
+        "question": "¿Qué proporción del tiempo pasan los programadores leyendo código vs escribiéndolo?",
+        "answer_preview": "Los programadores pasan el 90% de su tiempo intentando entender código y solo el 10% escribiéndolo.",
+        "num_retrieved": 6,
+        "num_relevant": 2,
+        "latency_ms": 8125.58
+      },
+      {
+        "question": "¿Qué es la deuda técnica en el software?",
+        "answer_preview": "La deuda técnica en el software es una herramienta estratégica que se refiere a decisiones técnicas que pueden facilitar el desarrollo a corto plazo, pero que requieren ser \"pagadas\" o resueltas en el",
+        "num_retrieved": 6,
+        "num_relevant": 3,
+        "latency_ms": 10687.49
+      },
+      {
+        "question": "¿Qué dice Dan Abramov sobre el código limpio?",
+        "answer_preview": "Dan Abramov sostiene que el código limpio no es el objetivo final, sino un medio para entregar valor al usuario. En su ensayo \"Goodbye, Clean Code\", comparte su experiencia de haber refactorizado códi",
+        "num_retrieved": 6,
+        "num_relevant": 5,
+        "latency_ms": 13433.78
+      },
+      {
+        "question": "¿Cuál es la Regla del Boy Scout aplicada al software?",
+        "answer_preview": "La Regla del Boy Scout aplicada al software significa \"deja siempre el código un poco mejor de como lo encontraste\". Esto implica que cada vez que un desarrollador toca un módulo, debe mejorarlo aunqu",
+        "num_retrieved": 6,
+        "num_relevant": 4,
+        "latency_ms": 9108.2
+      },
+      {
+        "question": "¿Qué es el principio DRY?",
+        "answer_preview": "No encontré esa información en el documento.",
+        "num_retrieved": 6,
+        "num_relevant": 4,
+        "latency_ms": 8742.63
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-06-16T15:54:03.476701+00:00",
+    "total_questions": 5,
+    "mrr": 0.8667,
+    "ndcg_at_k": 0.9022,
+    "hit_rate_at_k": 1.0,
+    "ragas": {
+      "context_recall": 0.9,
+      "context_precision": 0.9933333332861334,
+      "answer_relevancy": 0.7739970045486024
+    },
+    "avg_latency_ms": 9743.41,
+    "p95_latency_ms": 11517.41,
+    "details": [
+      {
+        "question": "¿Qué proporción del tiempo pasan los programadores leyendo código vs escribiéndolo?",
+        "answer_preview": "Los programadores pasan el 90% de su tiempo intentando entender código y solo el 10% escribiéndolo.",
+        "num_retrieved": 6,
+        "num_relevant": 2,
+        "latency_ms": 9551.93
+      },
+      {
+        "question": "¿Qué es la deuda técnica en el software?",
+        "answer_preview": "La deuda técnica en el software se refiere a los compromisos que se toman al desarrollar código que no es óptimo, con la intención de lograr resultados más rápidos. Se asemeja a la deuda financiera, y",
+        "num_retrieved": 6,
+        "num_relevant": 5,
+        "latency_ms": 11517.41
+      },
+      {
+        "question": "¿Qué dice Dan Abramov sobre el código limpio?",
+        "answer_preview": "Dan Abramov sostiene que el código limpio no es el objetivo final, sino un medio para entregar valor al usuario. En su ensayo \"Goodbye, Clean Code\", comparte su experiencia de haber refactorizado códi",
+        "num_retrieved": 6,
+        "num_relevant": 5,
+        "latency_ms": 10862.38
+      },
+      {
+        "question": "¿Cuál es la Regla del Boy Scout aplicada al software?",
+        "answer_preview": "La Regla del Boy Scout aplicada al software significa \"deja siempre el código un poco mejor de como lo encontraste\". Esto implica que cada vez que un desarrollador toca un módulo, debe mejorarlo aunqu",
+        "num_retrieved": 6,
+        "num_relevant": 4,
+        "latency_ms": 8185.68
+      },
+      {
+        "question": "¿Qué es el principio DRY?",
+        "answer_preview": "No encontré esa información en el documento.",
+        "num_retrieved": 6,
+        "num_relevant": 3,
+        "latency_ms": 8599.64
+      }
+    ]
+  }
+]
